@@ -1,0 +1,5 @@
+.idea/
+versions.tf
+main.tf
+customizations/main.tf
+aft-providers.tf

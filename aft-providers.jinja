@@ -1,0 +1,14 @@
+{% for account_id in account_ids %}
+provider "aws" {
+  alias = aft{{account_id}}
+  region = var.aft_home_region
+  assume_role {
+    role_arn = "arn:${var.aws_partition}:iam::{{account_id}}:role/AWSAFTExecution"
+  }
+  default_tags {
+    tags = {
+      managed_by = "AFT"
+    }
+  }
+}
+{% endfor %}
