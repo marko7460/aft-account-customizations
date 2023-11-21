@@ -62,6 +62,19 @@ def render_main_tf(account_ids):
         file.write(rendered_template)
 
 
+def render_outputs_tf():
+    # Open and read the template file
+    with open('outputs.tf.jinja', 'r') as file:
+        template_string = file.read()
+    # Create a template instance
+    template = Template(template_string)
+    # Render the template
+    rendered_template = template.render(node_id=os.getenv('NODE_ID'))
+    # Open and write to the output file
+    with open('outputs.tf', 'w') as file:
+        file.write(rendered_template)
+
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     # Read environment variable $TF_VARIABLES that is in base64 format and convert it to dictionary
@@ -76,4 +89,5 @@ if __name__ == '__main__':
     render_customization_module_tf(variables_dict['module_content'])
     render_versions_tf(variables_dict['account_ids'])
     render_main_tf(variables_dict['account_ids'])
+    render_outputs_tf()
 
